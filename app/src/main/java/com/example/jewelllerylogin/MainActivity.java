@@ -13,6 +13,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView newAccount;
@@ -21,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressDialog progressDialog;
 
-//    FirebaseAuth fAuth;
-//    FirebaseUser fUser;
+    FirebaseAuth fAuth;
+    FirebaseUser fUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         inputRegPassword = findViewById(R.id.inputRegPassword);
         btnLogin = findViewById(R.id.btnLogin);
         progressDialog = new ProgressDialog(this);
-//        fAuth = FirebaseAuth.getInstance();
-//        fUser = fAuth.getCurrentUser();
+        fAuth = FirebaseAuth.getInstance();
+        fUser = fAuth.getCurrentUser();
 
         newAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,21 +75,21 @@ public class MainActivity extends AppCompatActivity {
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
-//            fAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                @Override
-//                public void onComplete(@NonNull Task<AuthResult> task) {
-//                    if (task.isSuccessful()) {
-//                        progressDialog.dismiss();
-//                        sendUserToNextActivity();
-//                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-//
-//                    } else {
-//                        progressDialog.dismiss();
-//                        Toast.makeText(MainActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//
-//            });
+            fAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        progressDialog.dismiss();
+                        sendUserToNextActivity();
+                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        progressDialog.dismiss();
+                        Toast.makeText(MainActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            });
         }
     }
 

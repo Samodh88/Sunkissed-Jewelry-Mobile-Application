@@ -14,4 +14,14 @@ public class User {
         this.phone = phone;
         this.username = username;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", mail='" + mail + '\'' +
+                ", phone='" + phone + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }

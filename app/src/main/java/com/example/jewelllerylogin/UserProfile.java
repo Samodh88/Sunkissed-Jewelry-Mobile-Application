@@ -1,5 +1,6 @@
 package com.example.jewelllerylogin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -10,6 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserProfile extends AppCompatActivity {
     private TextView inputRegName, inputRegMail, inputPhno, inputUsername;
@@ -18,6 +25,10 @@ public class UserProfile extends AppCompatActivity {
     private ImageView imageView;
 
     private FirebaseAuth fAuth;
+
+    private FirebaseUser user;
+    private DatabaseReference dbReference;
+    private String userId;
 
 
     @Override
@@ -31,13 +42,33 @@ public class UserProfile extends AppCompatActivity {
         inputUsername = findViewById(R.id.inputUsername);
         progressDialog = new ProgressDialog(this);
 
-//        fAuth = FirebaseAuth.getInstance();
-//        FirebaseUser firebaseUser = fAuth.getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        dbReference = FirebaseDatabase.getInstance().getReference("Users");
+        userId = user.getUid();
 
-//        if (firebaseUser == null) {
-//            Toast.makeText(UserProfile.this, "Something went wrong pls try again", Toast.LENGTH_SHORT).show();
-//        } else {
-//
-//        }
+        dbReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User currentUser = snapshot.getValue(User.class);
+                progressDialog.dismiss();
+
+                if (currentUser != null) {
+                    String name = currentUser.name;
+                    String email = currentUser.mail;
+                    String phone = currentUser.phone;
+                    String userName = currentUser.username;
+
+                    inputRegName.setText(name);
+                    inputRegMail.setText(email);
+                    inputPhno.setText(phone);
+                    inputUsername.setText(userName);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(UserProfile.this, "Error!", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

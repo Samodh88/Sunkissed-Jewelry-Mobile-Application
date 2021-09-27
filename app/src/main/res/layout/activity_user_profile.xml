@@ -58,7 +58,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Samodh Salwathura"
                 android:textAlignment="viewEnd"
                 android:textColor="#5b5b5b"
                 android:textSize="18sp" />
@@ -92,7 +91,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="samodhsala88@gmail.com"
                 android:textAlignment="viewEnd"
                 android:textColor="#5b5b5b"
                 android:textSize="18sp" />
@@ -126,7 +124,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="0770304974"
                 android:textAlignment="viewEnd"
                 android:textColor="#5b5b5b"
                 android:textSize="18sp" />
@@ -160,7 +157,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="samodh88"
                 android:textAlignment="viewEnd"
                 android:textColor="#5b5b5b"
                 android:textSize="18sp" />
