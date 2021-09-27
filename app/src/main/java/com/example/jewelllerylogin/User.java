@@ -2,16 +2,16 @@ package com.example.jewelllerylogin;
 
 public class User {
 
-    public  String name,mail,phone,username;
+    public String name, mail, phone, username;
 
-    public User(){
-
+    public User() {
 
     }
-    public User(String name,String mail,String phone,String username){
+
+    public User(String name, String mail, String phone, String username) {
         this.name = name;
         this.mail = mail;
-        this.phone =phone;
-        this.username =username;
+        this.phone = phone;
+        this.username = username;
     }
 }
