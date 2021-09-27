@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1097778644143",
+    "project_id": "jewelllery-login-87c01",
+    "storage_bucket": "jewelllery-login-87c01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097778644143:android:87e0b1ddbeb6a7fa66405a",
+        "android_client_info": {
+          "package_name": "com.example.jewelllerylogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1097778644143-fu3m1ab42m6tp26vikbkl7lfg6rcfmep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSY7oeD5DhEuQRtB59C4-I4kgJJxVmodM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1097778644143-fu3m1ab42m6tp26vikbkl7lfg6rcfmep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

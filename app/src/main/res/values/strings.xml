@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Jewelllery Login</string>
+    <string name="inputLoginEmail">Enter Your Email</string>
+    <string name="inputLoginPass">Enter Your Password</string>
+    <string name="btnLogin">Login</string>
+    <string name="btnPersonInfo">Personal Information</string>
+    <string name="btnBrowse">Browse Categories</string>
+    <string name="btnNotify">Notifications</string>
+    <string name="btnCart">Cart</string>
+    <string name="inputRegName">Name</string>
+    <string name="inputRegMail">Email</string>
+    <string name="inputPhno">Phone number</string>
+    <string name="inputUsername">Username</string>
+    <string name="inputRegPassword">Password</string>
+    <string name="inputConfirmpw">Confirm Password</string>
+    <string name="btnRegister">Register</string>
+    <string name="btnEditProf">Edit Profile</string>
+    <string name="btnDeleteProf">Delete Profile</string>
+    <string name="inputEditName">Name</string>
+    <string name="InputEditMail">Email</string>
+    <string name="InputEditPhno">Phone Number</string>
+    <string name="InputEditUsername">Username</string>
+    <string name="inputEditPassword">Password</string>
+    <string name="inputEditConfirmPw">Confirm Password</string>
+    <string name="btnUpdate">Update Account</string>
+
+
+</resources>
