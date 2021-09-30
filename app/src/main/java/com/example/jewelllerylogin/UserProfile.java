@@ -33,32 +33,34 @@ public class UserProfile extends AppCompatActivity {
     private DatabaseReference dbReference;
     private String userId;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-        User currentUser = (User)this.getIntent().getSerializableExtra("currentUser");
+
         inputRegName = findViewById(R.id.inputRegName);
         inputRegMail = findViewById(R.id.inputRegMail);
         inputPhno = findViewById(R.id.inputPhno);
         inputUsername = findViewById(R.id.inputUsername);
         progressDialog = new ProgressDialog(this);
 
+        // get the current user as a serializable object
+        User currentUser = (User) this.getIntent().getSerializableExtra("currentUser");
+
         System.out.println(currentUser);
 
-        inputRegName.setText(currentUser.getName());
-        inputRegMail.setText(currentUser.getMail());
-        inputPhno.setText(currentUser.getPhone());
-        inputUsername.setText(currentUser.getUsername());
-
+        inputRegName.setText(currentUser.name);
+        inputRegMail.setText(currentUser.mail);
+        inputPhno.setText(currentUser.phone);
+        inputUsername.setText(currentUser.username);
     }
+
     public void test(View view) {
+        // get the current user as a serializable object
+        User currentUser = (User) this.getIntent().getSerializableExtra("currentUser");
+
         Intent intent = new Intent(this, Edit.class);
-        startActivity(intent);;
-
-
+        intent.putExtra("currentUser", currentUser);
+        startActivity(intent);
     }
 }

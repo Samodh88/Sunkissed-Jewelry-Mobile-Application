@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Edit extends AppCompatActivity {
-    TextInputLayout inputRegName, inputRegMail, inputRegPhno, inputUsername;
+    TextView inputRegName, inputRegMail, inputRegPhno, inputUsername;
     String _NAME, _EMAIL, _PHONENO, _USERNAME;
 
     DatabaseReference dbReference;
@@ -36,73 +36,67 @@ public class Edit extends AppCompatActivity {
         inputRegPhno = findViewById(R.id.inputRegPhno);
         inputUsername = findViewById(R.id.inputUsername);
 
-//        showAllUserData();
+        showAllUserData();
     }
 
     private void showAllUserData() {
+        // get the current user as a serializable object
+        User currentUser = (User) this.getIntent().getSerializableExtra("currentUser");
+
         Intent intent = getIntent();
         _USERNAME = intent.getStringExtra("username");
         _NAME = intent.getStringExtra("name");
         _PHONENO = intent.getStringExtra("phoneNo");
         _EMAIL = intent.getStringExtra("email");
 
-        inputRegName.getEditText().setText(_NAME);
-        inputRegMail.getEditText().setText(_EMAIL);
-        inputRegPhno.getEditText().setText(_PHONENO);
-        inputUsername.getEditText().setText(_USERNAME);
-
-
+        inputRegName.setText(currentUser.name);
+        inputRegMail.setText(currentUser.mail);
+        inputRegPhno.setText(currentUser.phone);
+        inputUsername.setText(currentUser.username);
     }
 
     public void update(View view) {
         if (isNameChanged() || isUsernameChanged() || isPhoneNoChanged() || isEmailChanged()) {
             Toast.makeText(this, "Data has been Updated", Toast.LENGTH_LONG).show();
-
-        }
-        else Toast.makeText(this, "Data is same and cannot be updated", Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(this, "Data is same and cannot be updated", Toast.LENGTH_SHORT).show();
     }
 
     private boolean isPhoneNoChanged() {
-        if(!_PHONENO.equals(inputRegPhno.getEditText().getText().toString())){
-            dbReference.child(_EMAIL).child("phone").setValue(inputRegPhno.getEditText().getText().toString());
+        if (!_PHONENO.equals(inputRegPhno.getText().toString())) {
+            dbReference.child(_EMAIL).child("phone").setValue(inputRegPhno.getText().toString());
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-
     private boolean isEmailChanged() {
 
-        if(!_EMAIL.equals(inputRegMail.getEditText().getText().toString())){
-            dbReference.child(_EMAIL).child("mail").setValue(inputRegMail.getEditText().getText().toString());
+        if (!_EMAIL.equals(inputRegMail.getText().toString())) {
+            dbReference.child(_EMAIL).child("mail").setValue(inputRegMail.getText().toString());
             return true;
-        }else{
+        } else {
             return false;
         }
 
     }
 
     private boolean isUsernameChanged() {
-        if(!_USERNAME.equals(inputUsername.getEditText().getText().toString())){
-            dbReference.child(_EMAIL).child("username").setValue(inputUsername.getEditText().getText().toString());
+        if (!_USERNAME.equals(inputUsername.getText().toString())) {
+            dbReference.child(_EMAIL).child("username").setValue(inputUsername.getText().toString());
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     private boolean isNameChanged() {
-        if(!_NAME.equals(inputRegName.getEditText().getText().toString())){
-            dbReference.child(_EMAIL).child("name").setValue(inputRegName.getEditText().getText().toString());
+        if (!_NAME.equals(inputRegName.getText().toString())) {
+            dbReference.child(_EMAIL).child("name").setValue(inputRegName.getText().toString());
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-
-
-
-
-
 }

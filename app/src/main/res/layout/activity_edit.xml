@@ -35,7 +35,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <TextView
                 android:id="@+id/inputRegName"
                 android:layout_width="328dp"
                 android:layout_height="48dp"
@@ -54,7 +54,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <TextView
                 android:id="@+id/inputRegMail"
                 android:layout_width="328dp"
                 android:layout_height="48dp"
@@ -74,7 +74,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inputRegName" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <TextView
                 android:id="@+id/inputRegPhno"
                 android:layout_width="328dp"
                 android:layout_height="48dp"
@@ -94,7 +94,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inputRegMail" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <TextView
                 android:id="@+id/inputUsername"
                 android:layout_width="328dp"
                 android:layout_height="48dp"
@@ -116,19 +116,17 @@
 
             <Button
                 android:id="@+id/btnUpdate"
-                android:layout_width="256dp"
-                android:layout_height="68dp"
-                android:layout_marginBottom="272dp"
+                android:layout_width="324dp"
+                android:layout_height="67dp"
+                android:layout_marginTop="208dp"
                 android:background="@drawable/input_b1"
                 android:onClick="update"
                 android:text="Update Account"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputUsername"
-                app:layout_constraintVertical_bias="0.962" />
+                app:layout_constraintTop_toBottomOf="@+id/inputUsername" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,20 +26,4 @@ public class User implements Serializable {
                 ", username='" + username + '\'' +
                 '}';
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getUsername() {
-        return username;
-    }
 }

@@ -8,7 +8,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></View>
+        android:layout_height="match_parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -45,6 +45,7 @@
                 android:background="@drawable/input_b1"
                 android:drawableLeft="@drawable/ic_baseline_email_24"
                 android:drawablePadding="10dp"
+                android:text="hello@gmail.com"
                 android:ems="10"
                 android:hint="@string/inputLoginEmail"
                 android:inputType="textEmailAddress"
@@ -68,6 +69,7 @@
                 android:drawableStart="@drawable/ic_baseline_security_24"
                 android:drawablePadding="10dp"
                 android:ems="10"
+                android:text="123456"
                 android:hint="@string/inputLoginPass"
                 android:inputType="textPassword"
                 android:paddingLeft="20dp"

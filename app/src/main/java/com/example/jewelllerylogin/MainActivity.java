@@ -44,14 +44,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        createnewAccount = findViewById(R.id.createAcc);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        createnewAccount = findViewById(R.id.createAcc);
+
         inputRegMail = findViewById(R.id.inputRegMail);
         inputRegPassword = findViewById(R.id.inputRegPassword);
+
         btnLogin = findViewById(R.id.btnLogin);
         progressDialog = new ProgressDialog(this);
+
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
 
@@ -65,88 +68,58 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PerformLogin();
-            }
-        });
-    }
+                String mail = inputRegMail.getText().toString();
+                String password = inputRegPassword.getText().toString();
 
-    private void PerformLogin() {
+                if (!mail.matches(emailPattern)) {
+                    inputRegMail.setError("Enter a valid Email");
+                } else if (password.isEmpty() || password.length() < 6) {
+                    inputRegPassword.setError("Password must contain more that 6 characters");
+                } else {
+                    progressDialog.setMessage("Please Wait a moment for Login....");
+                    progressDialog.setTitle("Registration");
+                    progressDialog.setCanceledOnTouchOutside(false);
+                    progressDialog.show();
 
-        String mail = inputRegMail.getText().toString();
-        String password = inputRegPassword.getText().toString();
-
-        if (!mail.matches(emailPattern)) {
-            inputRegMail.setError("Enter a valid Email");
-        } else if (password.isEmpty() || password.length() < 6) {
-            inputRegPassword.setError("Password must contain more that 6 characters");
-        } else {
-            progressDialog.setMessage("Please Wait a moment for Login....");
-            progressDialog.setTitle("Registration");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
-
-            fAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        progressDialog.dismiss();
-                        user = FirebaseAuth.getInstance().getCurrentUser();
-                        dbReference = FirebaseDatabase.getInstance().getReference("Users");
-                        userId = user.getUid();
-                        dbReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                User currentUser = snapshot.getValue(User.class);
+                    fAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
                                 progressDialog.dismiss();
 
-                                if (currentUser != null) {
-                                    String name = currentUser.name;
-                                    String email = currentUser.mail;
-                                    String phone = currentUser.phone;
-                                    String userName = currentUser.username;
+                                user = FirebaseAuth.getInstance().getCurrentUser();
+                                dbReference = FirebaseDatabase.getInstance().getReference("Users");
+                                userId = user.getUid();
 
-                                    User user = new User(name,email,phone,userName);
+                                dbReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        progressDialog.dismiss();
 
-//                                    Bundle bundle = new Bundle();
-//                                    bundle.putSerializable();
+                                        User currentUser = snapshot.getValue(User.class);
+                                        System.out.println(currentUser);
 
-                                    Intent intent = new Intent(MainActivity.this, UserProfile.class);
-                                    intent.putExtra("currentUser",user);
-                                    startActivity(intent);
+                                        if (currentUser != null) {
+                                            Intent intent = new Intent(MainActivity.this, UserProfile.class);
+                                            intent.putExtra("currentUser", currentUser);
+                                            startActivity(intent);
+                                        }
+                                    }
 
-
-
-                                }
-
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Toast.makeText(MainActivity.this, "Error!", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            } else {
+                                progressDialog.dismiss();
+                                Toast.makeText(MainActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
                             }
-
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                Toast.makeText(MainActivity.this, "Error!", Toast.LENGTH_LONG).show();
-                            }
-
-                        });
-
-                        sendUserToNextActivity();
-                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        progressDialog.dismiss();
-                        Toast.makeText(MainActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
-                    }
+                        }
+                    });
                 }
-
-            });
-        }
-    }
-
-    private void sendUserToNextActivity() {
-        Intent intent = new Intent(MainActivity.this, UserProfile.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
-    public void test(View view) {
+            }
+        });
     }
 }

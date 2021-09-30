@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "759977837739",
-    "firebase_url": "https://sunkissed-4252f-default-rtdb.firebaseio.com/",
-    "project_id": "sunkissed-4252f",
-    "storage_bucket": "sunkissed-4252f.appspot.com"
+    "project_number": "1071677188203",
+    "firebase_url": "https://zala-mad-proj-default-rtdb.asia-southeast1.firebasedatabase.app/",
+    "project_id": "zala-mad-proj",
+    "storage_bucket": "zala-mad-proj.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:759977837739:android:3c1506b2ba7d697b47e3ee",
+        "mobilesdk_app_id": "1:1071677188203:android:8651e5d2db70cfe449692e",
         "android_client_info": {
           "package_name": "com.example.jewelllerylogin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "759977837739-obm156a4uj7fp417o01musksk2t8m0rt.apps.googleusercontent.com",
+          "client_id": "1071677188203-d9llfludo8lpgp6uvge28l72bmcrusvj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDoUzPP3bqtScmFNvztdG6AharwVMUDuuI"
+          "current_key": "AIzaSyALF9p42YKrdf9EIssSnPkYEYVrkApuRSU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "759977837739-obm156a4uj7fp417o01musksk2t8m0rt.apps.googleusercontent.com",
+              "client_id": "1071677188203-d9llfludo8lpgp6uvge28l72bmcrusvj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
