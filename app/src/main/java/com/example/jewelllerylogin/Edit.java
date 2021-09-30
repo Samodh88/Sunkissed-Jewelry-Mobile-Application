@@ -1,102 +1,63 @@
 package com.example.jewelllerylogin;
 
-import androidx.annotation.NonNull;
-
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Edit extends AppCompatActivity {
-    TextView inputRegName, inputRegMail, inputRegPhno, inputUsername;
-    String _NAME, _EMAIL, _PHONENO, _USERNAME;
+    TextView inputRegName, inputRegMail, inputRegPhone, inputUsername;
 
-    DatabaseReference dbReference;
+    private FirebaseUser user;
+    private DatabaseReference dbReference;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-        dbReference = FirebaseDatabase.getInstance().getReference("Users");
-
-        inputRegName = findViewById(R.id.inputRegName);
-        inputRegMail = findViewById(R.id.inputRegMail);
-        inputRegPhno = findViewById(R.id.inputRegPhno);
-        inputUsername = findViewById(R.id.inputUsername);
-
-        showAllUserData();
-    }
-
-    private void showAllUserData() {
         // get the current user as a serializable object
         User currentUser = (User) this.getIntent().getSerializableExtra("currentUser");
 
-        Intent intent = getIntent();
-        _USERNAME = intent.getStringExtra("username");
-        _NAME = intent.getStringExtra("name");
-        _PHONENO = intent.getStringExtra("phoneNo");
-        _EMAIL = intent.getStringExtra("email");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        dbReference = FirebaseDatabase.getInstance().getReference("Users");
+        userId = user.getUid();
+
+        inputRegName = findViewById(R.id.inputRegName);
+        inputRegMail = findViewById(R.id.inputRegMail);
+        inputRegPhone = findViewById(R.id.inputRegPhno);
+        inputUsername = findViewById(R.id.inputUsername);
 
         inputRegName.setText(currentUser.name);
         inputRegMail.setText(currentUser.mail);
-        inputRegPhno.setText(currentUser.phone);
+        inputRegPhone.setText(currentUser.phone);
         inputUsername.setText(currentUser.username);
     }
 
     public void update(View view) {
-        if (isNameChanged() || isUsernameChanged() || isPhoneNoChanged() || isEmailChanged()) {
-            Toast.makeText(this, "Data has been Updated", Toast.LENGTH_LONG).show();
-        } else
-            Toast.makeText(this, "Data is same and cannot be updated", Toast.LENGTH_SHORT).show();
-    }
+        dbReference = FirebaseDatabase.getInstance().getReference("Users");
 
-    private boolean isPhoneNoChanged() {
-        if (!_PHONENO.equals(inputRegPhno.getText().toString())) {
-            dbReference.child(_EMAIL).child("phone").setValue(inputRegPhno.getText().toString());
-            return true;
-        } else {
-            return false;
-        }
-    }
+        User editedUser = new User(
+                inputRegName.getText().toString(),
+                inputRegMail.getText().toString(),
+                inputRegPhone.getText().toString(),
+                inputUsername.getText().toString()
+        );
 
-    private boolean isEmailChanged() {
-
-        if (!_EMAIL.equals(inputRegMail.getText().toString())) {
-            dbReference.child(_EMAIL).child("mail").setValue(inputRegMail.getText().toString());
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    private boolean isUsernameChanged() {
-        if (!_USERNAME.equals(inputUsername.getText().toString())) {
-            dbReference.child(_EMAIL).child("username").setValue(inputUsername.getText().toString());
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean isNameChanged() {
-        if (!_NAME.equals(inputRegName.getText().toString())) {
-            dbReference.child(_EMAIL).child("name").setValue(inputRegName.getText().toString());
-            return true;
-        } else {
-            return false;
-        }
+        dbReference.child(userId).setValue(editedUser).addOnSuccessListener(new OnSuccessListener() {
+            @Override
+            public void onSuccess(Object o) {
+                Toast.makeText(Edit.this, "Updated", Toast.LENGTH_LONG);
+            }
+        });
     }
 }

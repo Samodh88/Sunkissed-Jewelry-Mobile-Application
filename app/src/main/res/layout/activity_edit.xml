@@ -35,7 +35,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <EditText
                 android:id="@+id/inputRegName"
                 android:layout_width="328dp"
                 android:layout_height="48dp"
@@ -54,7 +54,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login" />
 
-            <TextView
+            <EditText
                 android:id="@+id/inputRegMail"
                 android:layout_width="328dp"
                 android:layout_height="48dp"
@@ -74,7 +74,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inputRegName" />
 
-            <TextView
+            <EditText
                 android:id="@+id/inputRegPhno"
                 android:layout_width="328dp"
                 android:layout_height="48dp"
@@ -94,7 +94,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inputRegMail" />
 
-            <TextView
+            <EditText
                 android:id="@+id/inputUsername"
                 android:layout_width="328dp"
                 android:layout_height="48dp"
