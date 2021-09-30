@@ -36,7 +36,7 @@ public class Edit extends AppCompatActivity {
         inputRegPhno = findViewById(R.id.inputRegPhno);
         inputUsername = findViewById(R.id.inputUsername);
 
-        showAllUserData();
+//        showAllUserData();
     }
 
     private void showAllUserData() {
@@ -100,6 +100,8 @@ public class Edit extends AppCompatActivity {
             return false;
         }
     }
+
+
 
 
 

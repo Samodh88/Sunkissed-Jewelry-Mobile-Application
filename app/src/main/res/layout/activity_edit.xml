@@ -14,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-90dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -35,8 +35,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/inputEditName"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputRegName"
                 android:layout_width="328dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="52dp"
@@ -54,8 +54,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login" />
 
-            <EditText
-                android:id="@+id/inputEditMail"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputRegMail"
                 android:layout_width="328dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="28dp"
@@ -72,10 +72,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputEditName" />
+                app:layout_constraintTop_toBottomOf="@+id/inputRegName" />
 
-            <EditText
-                android:id="@+id/inputEditPhno"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputRegPhno"
                 android:layout_width="328dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="24dp"
@@ -92,10 +92,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputEditMail" />
+                app:layout_constraintTop_toBottomOf="@+id/inputRegMail" />
 
-            <EditText
-                android:id="@+id/inputEditUsername"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputUsername"
                 android:layout_width="328dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="28dp"
@@ -112,60 +112,23 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputEditPhno" />
-
-            <EditText
-                android:id="@+id/inputEditPassword"
-                android:layout_width="328dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="344dp"
-                android:background="@drawable/input_b1"
-                android:ems="10"
-                android:hint="@string/inputEditPassword"
-                android:inputType="textEmailAddress"
-                android:paddingLeft="20dp"
-                android:paddingTop="13dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="13dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.492"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/login" />
-
-            <EditText
-                android:id="@+id/inputEditConfirmPw"
-                android:layout_width="328dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="416dp"
-                android:background="@drawable/input_b1"
-                android:ems="10"
-                android:hint="@string/inputEditConfirmPw"
-                android:inputType="textEmailAddress"
-                android:paddingLeft="20dp"
-                android:paddingTop="13dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="13dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.492"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/login" />
+                app:layout_constraintTop_toBottomOf="@+id/inputRegPhno" />
 
             <Button
                 android:id="@+id/btnUpdate"
                 android:layout_width="256dp"
                 android:layout_height="68dp"
+                android:layout_marginBottom="272dp"
                 android:background="@drawable/input_b1"
+                android:onClick="update"
                 android:text="Update Account"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputEditConfirmPw"
-                app:layout_constraintVertical_bias="0.265" />
+                app:layout_constraintTop_toBottomOf="@+id/inputUsername"
+                app:layout_constraintVertical_bias="0.962" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,56 +35,30 @@ public class UserProfile extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-
+        User currentUser = (User)this.getIntent().getSerializableExtra("currentUser");
         inputRegName = findViewById(R.id.inputRegName);
         inputRegMail = findViewById(R.id.inputRegMail);
         inputPhno = findViewById(R.id.inputPhno);
         inputUsername = findViewById(R.id.inputUsername);
         progressDialog = new ProgressDialog(this);
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        dbReference = FirebaseDatabase.getInstance().getReference("Users");
-        userId = user.getUid();
+        System.out.println(currentUser);
 
-        dbReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User currentUser = snapshot.getValue(User.class);
-                progressDialog.dismiss();
-
-                if (currentUser != null) {
-                    String name = currentUser.name;
-                    String email = currentUser.mail;
-                    String phone = currentUser.phone;
-                    String userName = currentUser.username;
-
-                    inputRegName.setText(name);
-                    inputRegMail.setText(email);
-                    inputPhno.setText(phone);
-                    inputUsername.setText(userName);
-                }
-
-            }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(UserProfile.this, "Error!", Toast.LENGTH_LONG).show();
-            }
-
-        });
+        inputRegName.setText(currentUser.getName());
+        inputRegMail.setText(currentUser.getMail());
+        inputPhno.setText(currentUser.getPhone());
+        inputUsername.setText(currentUser.getUsername());
 
     }
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btnEditProf:
-                startActivity(new Intent(this, Edit.class));
-                break;
+    public void test(View view) {
+        Intent intent = new Intent(this, Edit.class);
+        startActivity(intent);;
 
-        }
+
     }
 }

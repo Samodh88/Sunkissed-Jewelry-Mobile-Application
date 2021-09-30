@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "1097778644143",
-    "project_id": "jewelllery-login-87c01",
-    "storage_bucket": "jewelllery-login-87c01.appspot.com"
+    "project_number": "759977837739",
+    "firebase_url": "https://sunkissed-4252f-default-rtdb.firebaseio.com/",
+    "project_id": "sunkissed-4252f",
+    "storage_bucket": "sunkissed-4252f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1097778644143:android:87e0b1ddbeb6a7fa66405a",
+        "mobilesdk_app_id": "1:759977837739:android:3c1506b2ba7d697b47e3ee",
         "android_client_info": {
           "package_name": "com.example.jewelllerylogin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1097778644143-fu3m1ab42m6tp26vikbkl7lfg6rcfmep.apps.googleusercontent.com",
+          "client_id": "759977837739-obm156a4uj7fp417o01musksk2t8m0rt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCSY7oeD5DhEuQRtB59C4-I4kgJJxVmodM"
+          "current_key": "AIzaSyDoUzPP3bqtScmFNvztdG6AharwVMUDuuI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1097778644143-fu3m1ab42m6tp26vikbkl7lfg6rcfmep.apps.googleusercontent.com",
+              "client_id": "759977837739-obm156a4uj7fp417o01musksk2t8m0rt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

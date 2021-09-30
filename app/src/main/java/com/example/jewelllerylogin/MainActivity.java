@@ -18,12 +18,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView createnewAccount;
 
-    EditText inputRegMail,inputRegPassword;
+    EditText inputRegMail, inputRegPassword;
     Button btnLogin;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressDialog progressDialog;
@@ -31,25 +36,29 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseUser fUser;
 
+    private FirebaseUser user;
+    private DatabaseReference dbReference;
+    private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        createnewAccount =findViewById(R.id.createAcc);
+        createnewAccount = findViewById(R.id.createAcc);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         inputRegMail = findViewById(R.id.inputRegMail);
         inputRegPassword = findViewById(R.id.inputRegPassword);
-        btnLogin=findViewById(R.id.btnLogin);
-        progressDialog=new ProgressDialog(this);
-        fAuth=FirebaseAuth.getInstance();
-        fUser=fAuth.getCurrentUser();
+        btnLogin = findViewById(R.id.btnLogin);
+        progressDialog = new ProgressDialog(this);
+        fAuth = FirebaseAuth.getInstance();
+        fUser = fAuth.getCurrentUser();
 
         createnewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,register.class));
+                startActivity(new Intent(MainActivity.this, register.class));
             }
         });
 
@@ -68,37 +77,76 @@ public class MainActivity extends AppCompatActivity {
 
         if (!mail.matches(emailPattern)) {
             inputRegMail.setError("Enter a valid Email");
-        }else if(password.isEmpty() || password.length()<6)
-        {
+        } else if (password.isEmpty() || password.length() < 6) {
             inputRegPassword.setError("Password must contain more that 6 characters");
-        }else {
+        } else {
             progressDialog.setMessage("Please Wait a moment for Login....");
             progressDialog.setTitle("Registration");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
-            fAuth.signInWithEmailAndPassword(mail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            fAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful())
-                    {
+                    if (task.isSuccessful()) {
                         progressDialog.dismiss();
+                        user = FirebaseAuth.getInstance().getCurrentUser();
+                        dbReference = FirebaseDatabase.getInstance().getReference("Users");
+                        userId = user.getUid();
+                        dbReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                User currentUser = snapshot.getValue(User.class);
+                                progressDialog.dismiss();
+
+                                if (currentUser != null) {
+                                    String name = currentUser.name;
+                                    String email = currentUser.mail;
+                                    String phone = currentUser.phone;
+                                    String userName = currentUser.username;
+
+                                    User user = new User(name,email,phone,userName);
+
+//                                    Bundle bundle = new Bundle();
+//                                    bundle.putSerializable();
+
+                                    Intent intent = new Intent(MainActivity.this, UserProfile.class);
+                                    intent.putExtra("currentUser",user);
+                                    startActivity(intent);
+
+
+
+                                }
+
+                            }
+
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(MainActivity.this, "Error!", Toast.LENGTH_LONG).show();
+                            }
+
+                        });
+
                         sendUserToNextActivity();
                         Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                    }else
-                    {
+                    } else {
                         progressDialog.dismiss();
-                        Toast.makeText(MainActivity.this, ""+task.getException(), Toast.LENGTH_SHORT).show(); }
+                        Toast.makeText(MainActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             });
         }
     }
 
-        private void sendUserToNextActivity() {
-            Intent intent=new Intent(MainActivity.this,UserProfile.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
+    private void sendUserToNextActivity() {
+        Intent intent = new Intent(MainActivity.this, UserProfile.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void test(View view) {
+    }
 }
