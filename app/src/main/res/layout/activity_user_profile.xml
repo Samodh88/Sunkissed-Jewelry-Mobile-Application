@@ -203,6 +203,7 @@
         android:layout_marginStart="188dp"
         android:background="@drawable/button_background"
         android:gravity="center"
+        android:onClick="delete"
         android:text="@string/btnDeleteProf"
         android:textColor="#ffffff"
         android:textSize="18sp"

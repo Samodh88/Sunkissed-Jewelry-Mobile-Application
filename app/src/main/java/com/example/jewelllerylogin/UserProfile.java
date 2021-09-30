@@ -7,12 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class UserProfile extends AppCompatActivity {
     private TextView inputRegName, inputRegMail, inputPhno, inputUsername;
@@ -56,5 +59,18 @@ public class UserProfile extends AppCompatActivity {
         Intent intent = new Intent(this, Edit.class);
         intent.putExtra("currentUser", currentUser);
         startActivity(intent);
+    }
+
+    public void delete(View view){
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        dbReference = FirebaseDatabase.getInstance().getReference("Users");
+        userId = user.getUid();
+
+        dbReference.child(userId).setValue(null).addOnSuccessListener(new OnSuccessListener() {
+            @Override
+            public void onSuccess(Object o) {
+                Toast.makeText(UserProfile.this, "Delete Successful", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

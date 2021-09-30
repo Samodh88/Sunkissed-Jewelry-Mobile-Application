@@ -56,7 +56,7 @@ public class Edit extends AppCompatActivity {
         dbReference.child(userId).setValue(editedUser).addOnSuccessListener(new OnSuccessListener() {
             @Override
             public void onSuccess(Object o) {
-                Toast.makeText(Edit.this, "Updated", Toast.LENGTH_LONG);
+                Toast.makeText(Edit.this, "Edit Successful", Toast.LENGTH_SHORT).show();
             }
         });
     }
